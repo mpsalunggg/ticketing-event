@@ -1,0 +1,83 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-05 11:50:38.707950",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "event_activiy_section",
+  "title",
+  "date",
+  "venue",
+  "column_break_olde",
+  "price",
+  "total_ticket",
+  "available"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_activiy_section",
+   "fieldtype": "Section Break",
+   "label": "Event Activiy"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "venue",
+   "fieldtype": "Data",
+   "label": "Venue"
+  },
+  {
+   "fieldname": "column_break_olde",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "Price"
+  },
+  {
+   "fieldname": "total_ticket",
+   "fieldtype": "Int",
+   "label": "Total Ticket"
+  },
+  {
+   "default": "0",
+   "fieldname": "available",
+   "fieldtype": "Check",
+   "label": "Available"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-05 11:52:23.528159",
+ "modified_by": "Administrator",
+ "module": "Ticketing Event",
+ "name": "Event Activity",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
