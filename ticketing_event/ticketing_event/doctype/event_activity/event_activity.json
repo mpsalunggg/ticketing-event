@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:title",
  "creation": "2025-03-05 11:50:38.707950",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -23,17 +24,24 @@
   {
    "fieldname": "title",
    "fieldtype": "Data",
-   "label": "Title"
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
   },
   {
    "fieldname": "venue",
    "fieldtype": "Data",
-   "label": "Venue"
+   "in_list_view": 1,
+   "label": "Venue",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_olde",
@@ -42,12 +50,15 @@
   {
    "fieldname": "price",
    "fieldtype": "Currency",
-   "label": "Price"
+   "in_list_view": 1,
+   "label": "Price",
+   "reqd": 1
   },
   {
    "fieldname": "total_ticket",
    "fieldtype": "Int",
-   "label": "Total Ticket"
+   "label": "Total Ticket",
+   "reqd": 1
   },
   {
    "default": "0",
@@ -58,10 +69,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-05 11:52:23.528159",
+ "modified": "2025-03-05 13:20:48.110596",
  "modified_by": "Administrator",
  "module": "Ticketing Event",
  "name": "Event Activity",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
