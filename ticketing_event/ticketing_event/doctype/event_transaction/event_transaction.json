@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "TR-EVENT-####",
+ "autoname": "TR-EVENT-.####",
  "creation": "2025-03-05 13:08:51.206761",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -48,7 +48,8 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
-   "options": "Booked\nPaid\nCancelled",
+   "options": "Booked\nCancelled\nPaid",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -58,7 +59,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-05 13:27:04.980862",
+ "modified": "2025-03-05 16:12:50.785057",
  "modified_by": "Administrator",
  "module": "Ticketing Event",
  "name": "Event Transaction",
