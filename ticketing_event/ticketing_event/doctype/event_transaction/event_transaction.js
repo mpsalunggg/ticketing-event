@@ -7,10 +7,6 @@ frappe.ui.form.on('Event Transaction', {
     frm.disable_save()
 
     if (frm.doc.status === 'Booked') {
-      frm.add_custom_button(__('Mark as Paid'), function () {
-        frm.set_value('status', 'Paid')
-        frm.save()
-      })
       AddButtonBooked(frm)
     }
 
@@ -21,6 +17,7 @@ frappe.ui.form.on('Event Transaction', {
           frm.set_df_property('quantity', 'read_only', 1)
           frm.set_df_property('event', 'read_only', 1)
           frm.remove_custom_button('Booked')
+          AddButtonPaid(frm)
           AddButtonCancelled(frm)
         }
         if (r.message.status === 'Paid') {
@@ -37,26 +34,10 @@ frappe.ui.form.on('Event Transaction', {
       })
   },
 
-  // // When a new transaction is created
-  // validate: function (frm) {
-  //   if (frm.doc.__islocal) {
-  //     // Set initial status to 'Booked' for new transactions
-  //     frm.set_value('status', 'Booked')
-
-  //     // Don't call updateEventTickets here - it will be handled in after_save
-  //     // This avoids duplicate ticket reductions
-  //   }
-  // },
-
-  // After saving - handle status changes
   after_save: function (frm) {
     if (frm.doc.status === 'Booked') {
       updateEventTickets(frm)
     }
-
-    // if (frm.doc.status === 'Paid') {
-    //   updateEventTickets(frm)
-    // }
 
     if (frm.doc.status === 'Paid' && frm._previous_status === 'Booked') {
       showPaymentSuccessMessage(frm)
