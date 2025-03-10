@@ -69,7 +69,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-05 13:20:48.110596",
+ "modified": "2025-03-10 08:59:17.178056",
  "modified_by": "Administrator",
  "module": "Ticketing Event",
  "name": "Event Activity",
@@ -87,6 +87,27 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Crew",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Customer",
+   "share": 1
   }
  ],
  "sort_field": "modified",
