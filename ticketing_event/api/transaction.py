@@ -1,6 +1,7 @@
 import frappe
 from frappe.utils import now
 
+@frappe.whitelist()
 def create_transaction(event, quantity):
     try:
         event_doc = frappe.get_doc("Event Activity", event)
@@ -24,6 +25,7 @@ def create_transaction(event, quantity):
     except Exception as e:
         return {"message": str(e), "indicator": "red"}
 
+@frappe.whitelist()
 def update_transaction_status(transaction_id, status):
     try:
         valid_status = ["Booked", "Paid", "Cancelled"]
