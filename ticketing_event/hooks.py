@@ -242,3 +242,7 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+api_methods = [
+    "ticketing_event.api.transaction.create_transaction",
+    "ticketing_event.api.transaction.update_transaction_status"
+]
