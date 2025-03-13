@@ -10,6 +10,7 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+import { useFrappeAuth } from "frappe-react-sdk";
 
 interface NavbarProps {
    type?: "auth" | "main";
@@ -17,6 +18,12 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = (props) => {
    const { type = "main" } = props;
+   const { logout } = useFrappeAuth();
+
+   const handleLogout = async () => {
+      await logout();
+      window.location.href = "/auth_signin";
+   };
 
    return (
       <div className="bg-background px-4 md:px-[100px] h-[70px] border-b fixed w-full flex justify-between items-center z-10">
@@ -67,7 +74,9 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                      </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                     <DropdownMenuItem>Logout</DropdownMenuItem>
+                     <DropdownMenuItem onClick={handleLogout}>
+                        Logout
+                     </DropdownMenuItem>
                   </DropdownMenuContent>
                </DropdownMenu>
             </div>

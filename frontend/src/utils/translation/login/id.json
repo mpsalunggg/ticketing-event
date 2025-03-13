@@ -6,6 +6,6 @@
    "lets_enter_email": "Masukkan email Anda di bawah ini",
    "dont_have_account": "Belum memiliki akun?",
    "register_here": "Daftar di sini",
-   "with_google": "dengan Google",
+   "with_sso": "dengan {{sso}}",
    "powered_by_tan": "Didukung oleh TAN Digital 2024 Hak cipta dilindungi undang-undang."
 }

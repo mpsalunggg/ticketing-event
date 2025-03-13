@@ -6,6 +6,6 @@
    "lets_enter_email": "Let’s enter your email down below",
    "dont_have_account": "Don’t have an account?",
    "register_here": "Register here",
-   "with_google": "with Google",
+   "with_sso": "with {{sso}}",
    "powered_by_tan": "Powered by TAN Digital 2024 All right reserved."
 }

@@ -7,11 +7,11 @@ function App() {
    return (
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
          <FrappeProvider
-            // url=""
+            // url="http://192.168.0.177:8000"
             // tokenParams={{
-            //      useToken: true,
-            //      token: () => "my_token",
-            //      type: "Bearer",
+            //    useToken: true,
+            //    token: () => "OAuthBearerToken",
+            //    type: "Bearer",
             // }}
             socketPort={import.meta.env.VITE_SOCKET_PORT}
             siteName={import.meta.env.VITE_SITE_NAME}

@@ -14,7 +14,7 @@ import { useSignIn } from "@/features/auth/signin/hooks";
 import { Fragment } from "react";
 
 const SignInView = () => {
-   const { t, form, handleSubmit } = useSignIn();
+   const { t, form, handleSubmit, handleSSOLogin, dataSSO } = useSignIn();
 
    return (
       <Fragment>
@@ -89,10 +89,27 @@ const SignInView = () => {
                         <Button variant="default" type="submit">
                            {t("login:login")}
                         </Button>
-                        <Button variant="outline">
-                           <GoogleIcon width={16} height={16} />{" "}
-                           {t("login:with_google")}
-                        </Button>
+
+                        {dataSSO?.data.map((item, i) => (
+                           <Button
+                              key={i}
+                              variant="outline"
+                              type="button"
+                              onClick={(e) => {
+                                 handleSSOLogin(item);
+                              }}
+                           >
+                              {/* <GoogleIcon width={16} height={16} />{" "} */}
+                              <img
+                                 src={item.icon}
+                                 alt=""
+                                 width={16}
+                                 height={16}
+                              />
+                              {t("login:with_sso", { sso: item.provider_name })}
+                           </Button>
+                        ))}
+
                         <div className="text-center text-sm font-normal">
                            {t("login:dont_have_account")}{" "}
                            <span className="underline font-semibold text-foreground">

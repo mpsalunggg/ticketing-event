@@ -9,7 +9,7 @@ const MainLayout: React.FC = () => {
    const { status } = useModalStore();
 
    return (
-      <div className="h-screen">
+      <div className="flex flex-col min-h-screen relative">
          <Navbar />
          <div className="py-[70px] lg:px-[100px] px-4 bg-primary-foreground">
             <div className="mt-4 w-full relative">
