@@ -13,7 +13,7 @@ const useHome = () => {
    const { data } = useFrappeGetDocList<EventActivityValidationType>(
       "Event Activity",
       {
-         fields: ["name", "title", "date", "venue", "price", "total_ticket"],
+         fields: ["name", "title", "date", "venue", "price", "total_ticket", "poster"],
       },
    );
 
