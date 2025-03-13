@@ -5,3 +5,6 @@
 tags
 node_modules
 __pycache__
+
+ticketing_event/public/frontend/
+ticketing_event/www/frontend.html

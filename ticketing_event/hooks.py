@@ -241,3 +241,20 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+
+
+# website_route_rules = [
+#    {'from_route': '/frontend/<path:app_path>', 'to_route': 'test'},
+#    {'from_route': '/frontend/<path:app_path>', 'to_route': 'test2'}
+# ]
+# routes = [
+#     {"from_route": "/", "to_route": "test"},
+#     {"from_route": "/test", "to_route": "test2"},
+# ]
+
+website_route_rules = [
+   {'from_route': '/ticketing_event/<path:app_path>', 'to_route': 'ticketing_event'},
+   {'from_route': '/ticketing_event/<path:app_path>', 'to_route': 'auth_signin'},
+   {'from_route': '/ticketing_event/<path:app_path>', 'to_route': 'home'}
+]
+# web_include_js = ["/assets/frappe/js/frappe-web.min.js"]
