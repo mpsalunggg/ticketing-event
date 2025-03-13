@@ -1,6 +1,7 @@
 import { Modal } from "@/components/common/modal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useHome } from "@/features/home/hooks";
 import { Fragment, useState } from "react";
 
 interface CheckoutTicketProps {
@@ -12,6 +13,8 @@ interface CheckoutTicketProps {
 }
 
 const CheckoutTicket: React.FC<CheckoutTicketProps> = (props) => {
+   const { createTransaction } = useHome();
+
    const [quantity, setQuantity] = useState(1);
 
    const handleQuantityChange = (value: string) => {
@@ -62,7 +65,10 @@ const CheckoutTicket: React.FC<CheckoutTicketProps> = (props) => {
                   </div>
 
                   <div className="mt-2 flex flex-col gap-y-3">
-                     <Button className="bg-blue-500 hover:bg-blue-600">
+                     <Button
+                        className="bg-blue-500 hover:bg-blue-600"
+                        onClick={() => createTransaction(props.title, quantity)}
+                     >
                         Booked Ticket
                      </Button>
                      <Button>Buy Ticket</Button>

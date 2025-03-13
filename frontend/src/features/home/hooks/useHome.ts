@@ -19,12 +19,41 @@ const useHome = () => {
 
    /* --------------------------- HANDLER FUNCTIONS --------------------------- */
 
+   const createTransaction = async (event: string, quantity: number) => {
+      try {
+         const response = await fetch(
+            "ticketing_event.api.transaction.create_transaction",
+            {
+               method: "POST",
+               headers: {
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify({
+                  event,
+                  quantity,
+               }),
+            },
+         );
+
+         const result = await response.json();
+         if (!response.ok) {
+            throw new Error(result.message || "Failed to create transaction");
+         }
+
+         console.log("Transaction Created:", result);
+         return result;
+      } catch (error) {
+         console.error("Error creating transaction:", error);
+      }
+   };
+
    /* ---------------------------------- RETURN ------------------------------- */
 
    return {
       t,
       dataEventActivity: data || [],
       navigate,
+      createTransaction,
    };
 };
 
