@@ -10,6 +10,7 @@
   "title",
   "date",
   "venue",
+  "poster",
   "column_break_olde",
   "price",
   "total_ticket",
@@ -65,11 +66,17 @@
    "fieldname": "available",
    "fieldtype": "Check",
    "label": "Available"
+  },
+  {
+   "fieldname": "poster",
+   "fieldtype": "Attach Image",
+   "label": "Poster",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-12 10:18:21.668978",
+ "modified": "2025-03-13 14:20:25.361576",
  "modified_by": "Administrator",
  "module": "Ticketing Event",
  "name": "Event Activity",
@@ -89,13 +96,26 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Crew",
+   "share": 1,
+   "write": 1
+  },
+  {
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Event Customer",
-   "share": 1
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
