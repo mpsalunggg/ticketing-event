@@ -8,7 +8,7 @@
       "build": "vite build --base=/assets/ticketing_event/frontend/ && yarn copy-html-entry",
       "lint": "eslint .",
       "preview": "vite preview",
-      "copy-html-entry": "cp ../ticketing_event/public/frontend/index.html ../ticketing_event/www/frontend.html && cp ../ticketing_event/public/frontend/index.html ../ticketing_event/www/auth_signin.html && cp ../ticketing_event/public/frontend/index.html ../ticketing_event/www/home.html && cp ../ticketing_event/public/frontend/index.html ../ticketing_event/www/test.html"
+      "copy-html-entry": "cp ../ticketing_event/public/frontend/index.html ../ticketing_event/www/login.html && cp ../ticketing_event/public/frontend/index.html ../ticketing_event/www/home.html"
    },
    "dependencies": {
       "@hookform/resolvers": "^4.1.3",

@@ -6,7 +6,7 @@ import {
    useFrappeGetCall,
    useFrappeGetDoc,
 } from "frappe-react-sdk";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -51,25 +51,10 @@ const useSignIn = () => {
 
    const handleSubmit = async (data: AuthValidationType) => {
       try {
-         const res = await login({
+         await login({
             username: data.email,
             password: data.password,
          });
-
-         if (res) {
-            const dataRole = await refetchUserRole();
-
-            const roleAdmin = dataRole.roles.some(
-               (role: { role: string }) => role.role === "System Manager",
-            );
-
-            if (roleAdmin) {
-               navigate(`/app/users`);
-            } else {
-               navigate("/home");
-            }
-         }
-         // navigate("/home");
       } catch (error) {
          console.error("Login gagal:", error);
       }
@@ -96,17 +81,30 @@ const useSignIn = () => {
 
    const { data: dataSSO } = useFrappeGetCall<SocialResponse>(
       "ticketing_event.api.login.get_social",
+      {},
+      { credentials: "include" },
    );
 
    const { mutate: refetchUserRole } = useFrappeGetDoc(
       "User",
       currentUser!,
-      [["enabled", "=", false]],
+      [["enabled", "=", true]],
       {
          revalidateOnFocus: false,
          revalidateOnMount: false,
       },
    );
+
+   useEffect(() => {
+      if (currentUser) {
+         refetchUserRole().then((dataRole) => {
+            const roleAdmin = dataRole?.roles?.some(
+               (item: any) => item.role === "System Manager",
+            );
+            window.location.href = roleAdmin ? "/app" : "/home";
+         });
+      }
+   }, [currentUser]);
 
    /* ---------------------------------- RETURN ------------------------------- */
 

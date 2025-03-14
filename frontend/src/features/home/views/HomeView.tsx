@@ -7,11 +7,11 @@ import { useHome } from "@/features/home/hooks";
 import { useModalStore } from "@/stores";
 import moment from "moment";
 import { Link, useNavigate } from "react-router-dom";
+import { useFrappeAuth } from "frappe-react-sdk";
 
 const HomeView = () => {
-   const { dataEventActivity } = useHome();
+   const { dataEventActivity, navigate } = useHome();
    const { openModal, modalType, data } = useModalStore();
-   const navigate = useNavigate();
    return (
       <div className="flex flex-col gap-y-6">
          <div className="grid grid-cols-4 gap-6">

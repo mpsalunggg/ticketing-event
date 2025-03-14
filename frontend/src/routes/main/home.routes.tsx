@@ -1,3 +1,5 @@
+import DetailView from "@/features/home/views/DetailView";
+import TestView from "@/features/home/views/TestView";
 import HomePage from "@/pages/home";
 
 const homeRoutes = [
@@ -6,8 +8,12 @@ const homeRoutes = [
       element: <HomePage />,
    },
    {
-      path: "test",
-      element: <p>testtt</p>,
+      path: "detail",
+      element: <DetailView />,
+   },
+   {
+      path: "test/detail",
+      element: <TestView />,
    },
 ];
 
