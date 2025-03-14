@@ -15,8 +15,6 @@ const HomeView = () => {
    return (
       <div className="flex flex-col gap-y-6">
          <div className="grid grid-cols-4 gap-6">
-            <Link to={"/home/test"}>test</Link>
-            <button onClick={() => navigate("/home/test")}>testt</button>
             {dataEventActivity.map((item, i) => (
                <>
                   <Card key={i} className="p-3 shadow-sm">

@@ -71,7 +71,6 @@ const CheckoutTicket: React.FC<CheckoutTicketProps> = (props) => {
                      >
                         Booked Ticket
                      </Button>
-                     <Button>Buy Ticket</Button>
                   </div>
                </div>
             </div>
