@@ -20,12 +20,15 @@ def get_social():
     try:
         provider_logins = []
         redirect_to = frappe.local.request.args.get("redirect-to")
-        redirect_to = sanitize_redirect(redirect_to)
 
-        roles = get_all_roles()
+        session_user = frappe.session.user
+        roles = frappe.get_roles(session_user)
+        # redirect_to = sanitize_redirect(redirect_to) if "System Manager" in roles else "/home"
 
-        if "System Manager" not in roles:
-            redirect_to = "/home"
+        if not redirect_to:
+            redirect_to = "/app" if "System Manager" in roles else "/home"
+        else:
+            redirect_to = sanitize_redirect(redirect_to)
             
         providers = frappe.get_all(
             "Social Login Key",

@@ -13,7 +13,7 @@ interface CheckoutTicketProps {
 }
 
 const CheckoutTicket: React.FC<CheckoutTicketProps> = (props) => {
-   const { createTransaction } = useHome();
+   const { handleBooked } = useHome();
 
    const [quantity, setQuantity] = useState(1);
 
@@ -67,7 +67,7 @@ const CheckoutTicket: React.FC<CheckoutTicketProps> = (props) => {
                   <div className="mt-2 flex flex-col gap-y-3">
                      <Button
                         className="bg-blue-500 hover:bg-blue-600"
-                        onClick={() => createTransaction(props.title, quantity)}
+                        onClick={() => handleBooked(props.title, quantity)}
                      >
                         Booked Ticket
                      </Button>
