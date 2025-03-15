@@ -2,6 +2,7 @@ import { Modal } from "@/components/common/modal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useHome } from "@/features/home/hooks";
+import { Map } from "lucide-react";
 import { Fragment, useState } from "react";
 
 interface CheckoutTicketProps {
@@ -33,45 +34,45 @@ const CheckoutTicket: React.FC<CheckoutTicketProps> = (props) => {
       <Fragment>
          <Modal
             title={props.title}
-            contentClass="min-w-[500px] max-w-[500px] max-h-[90%] flex flex-col"
+            contentClass="lg:min-w-[700px] max-w-[700px] max-h-[90%] flex flex-col"
             childClass="max-h-[90%] overflow-y-auto mr-4"
          >
-            <div className="flex-1 overflow-y-auto py-3">
+            <div className="flex-1 overflow-y-auto">
                <div className="flex flex-col gap-y-3">
-                  <div className="p-1 flex flex-col gap-y-4">
+                  <div className="flex gap-4 lg:flex-row flex-col">
                      <img
                         src={props.image}
                         alt=""
-                        className="w-[200px] h-[200px] m-auto"
+                        className="w-[200px] rounded-lg"
                      />
-                     <div className="flex flex-col gap-y-1">
-                        <p className="font-semibold text-sm">{props.venue}</p>
-                        <p className="font-semibold">
-                           Price :{" "}
-                           {`IDR ${props.price.toLocaleString("id-ID", { minimumFractionDigits: 2 })}`}
+                     <div className="flex flex-col gap-3 w-full">
+                        <p className="font-semibold text-sm flex gap-2 items-center">
+                           <Map /> {props.venue}
                         </p>
+                        <p className="font-semibold">
+                           {`Rp. ${props.price.toLocaleString("id-ID", { minimumFractionDigits: 2 })}`}{" "}
+                           / Ticket
+                        </p>
+                        <Input
+                           type="number"
+                           value={quantity}
+                           onChange={(e) =>
+                              handleQuantityChange(e.target.value)
+                           }
+                           className="w-20"
+                           min={1}
+                        />
+                        <p className="text-md font-semibold">
+                           Total:{" "}
+                           {`Rp. ${getTotalPrice().toLocaleString("id-ID", { minimumFractionDigits: 2 })}`}
+                        </p>
+                        <Button
+                           className="bg-blue-500 hover:bg-blue-600 w-full text-white"
+                           onClick={() => handleBooked(props.title, quantity)}
+                        >
+                           Booked Ticket
+                        </Button>
                      </div>
-                     <Input
-                        type="number"
-                        value={quantity}
-                        onChange={(e) => handleQuantityChange(e.target.value)}
-                        className="w-20"
-                        min={1}
-                     />
-                     <p className="text-xl font-semibold">
-                        Total:{" "}
-                        {`IDR ${getTotalPrice().toLocaleString("id-ID", { minimumFractionDigits: 2 })}`}
-                     </p>
-                  </div>
-
-                  <div className="mt-2 flex flex-col gap-y-3">
-                     <Button
-                        className="bg-blue-500 hover:bg-blue-600"
-                        onClick={() => handleBooked(props.title, quantity)}
-                     >
-                        Booked Ticket
-                     </Button>
-                     <Button>Buy Ticket</Button>
                   </div>
                </div>
             </div>
