@@ -1,6 +1,7 @@
 import { EventActivityValidationType } from "@/schemas/eventActivity";
 import { useModalStore } from "@/stores";
 import {
+   useFrappeAuth,
    useFrappeGetCall,
    useFrappeGetDocList,
    useFrappePostCall,
@@ -17,9 +18,10 @@ const useHome = () => {
    const { t } = useTranslation();
    const navigate = useNavigate();
    const { closeModal } = useModalStore();
+   const { currentUser } = useFrappeAuth();
 
    /* --------------------------- HANDLER FUNCTIONS --------------------------- */
-   const { data, mutate: resetListEvent } =
+   const { data: dataEventActivity, mutate: resetListEvent } =
       useFrappeGetDocList<EventActivityValidationType>("Event Activity", {
          fields: [
             "name",
@@ -30,6 +32,17 @@ const useHome = () => {
             "total_ticket",
             "poster",
          ],
+      });
+
+   const { data: dataTransaction, mutate: resetListTransaction } =
+      useFrappeGetDocList<EventActivityValidationType>("Event Transaction", {
+         fields: ["*"],
+         filters: [["customer", "=", currentUser as string]],
+         limit: 999999999,
+         orderBy: {
+            field: "creation",
+            order: "desc",
+         },
       });
 
    const { call: callCreateTransaction } = useFrappePostCall(
@@ -44,6 +57,7 @@ const useHome = () => {
          });
          toast.success("Booking berhasil, " + res.message.message);
          resetListEvent();
+         resetListTransaction();
          closeModal();
       } catch (err: any) {
          toast.error(err.message);
@@ -54,9 +68,10 @@ const useHome = () => {
 
    return {
       t,
-      dataEventActivity: data || [],
+      dataEventActivity,
       navigate,
       handleBooked,
+      dataTransaction,
    };
 };
 

@@ -21,7 +21,7 @@ const HomeView = () => {
             </Button>
          </div>
          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {dataEventActivity.map((item, i) => (
+            {dataEventActivity?.map((item, i) => (
                <Card key={i} className="p-3 shadow-sm">
                   <div className="relative">
                      <img
