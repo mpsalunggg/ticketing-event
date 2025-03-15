@@ -242,19 +242,16 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
-
 # website_route_rules = [
 #    {'from_route': '/frontend/<path:app_path>', 'to_route': 'test'},
 #    {'from_route': '/frontend/<path:app_path>', 'to_route': 'test2'}
 # ]
-# routes = [
-#     {"from_route": "/", "to_route": "test"},
-#     {"from_route": "/test", "to_route": "test2"},
-# ]
+
+# web_include_js = ["/assets/frappe/js/frappe-web.min.js"]
 
 website_route_rules = [
    {'from_route': '/ticketing_event/<path:app_path>', 'to_route': 'ticketing_event'},
-   {'from_route': '/ticketing_event/<path:app_path>', 'to_route': 'auth_signin'},
-   {'from_route': '/ticketing_event/<path:app_path>', 'to_route': 'home'}
+   {'from_route': '/home/<path:app_path>', 'to_route': 'home'},
+   {'from_route': '/login', 'to_route': 'login'},
 ]
-# web_include_js = ["/assets/frappe/js/frappe-web.min.js"]
+

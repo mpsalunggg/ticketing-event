@@ -6,6 +6,7 @@ export const EventActivityValidationSchema = z.object({
    price: z.number(),
    total_ticket: z.number(),
    title: z.string(),
+   poster: z.string(),
    _comment_count: z.number(),
 });
 

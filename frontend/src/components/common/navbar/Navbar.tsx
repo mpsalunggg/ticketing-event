@@ -22,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 
    const handleLogout = async () => {
       await logout();
-      window.location.href = "/auth_signin";
+      window.location.href = "/login";
    };
 
    return (

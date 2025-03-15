@@ -1,51 +1,58 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import CheckoutTicket from "@/features/home/components/CheckoutTicket";
 import { useHome } from "@/features/home/hooks";
 import { useModalStore } from "@/stores";
 import moment from "moment";
+import { Link, useNavigate } from "react-router-dom";
+import { useFrappeAuth } from "frappe-react-sdk";
 
 const HomeView = () => {
-   const { dataEventActivity } = useHome();
+   const { dataEventActivity, navigate } = useHome();
    const { openModal, modalType, data } = useModalStore();
-
    return (
       <div className="flex flex-col gap-y-6">
          <div className="grid grid-cols-4 gap-6">
+            <Link to={"/home/test"}>test</Link>
+            <button onClick={() => navigate("/home/test")}>testt</button>
             {dataEventActivity.map((item, i) => (
                <>
-                  <Card
-                     key={i}
-                     className="p-3 shadow-sm"
-                     onClick={() =>
-                        openModal({
-                           type: "co",
-                           data: {
-                              price: item.price,
-                              title: item.title,
-                              image: "https://upload.wikimedia.org/wikipedia/id/thumb/2/2e/Music_of_the_Spheres_World_Tour_Poster.jpeg/440px-Music_of_the_Spheres_World_Tour_Poster.jpeg",
-                              venue: item.venue,
-                              total_ticket: item.total_ticket,
-                           },
-                        })
-                     }
-                  >
-                     <div>
+                  <Card key={i} className="p-3 shadow-sm">
+                     <div className="relative">
                         <img
-                           src="https://upload.wikimedia.org/wikipedia/id/thumb/2/2e/Music_of_the_Spheres_World_Tour_Poster.jpeg/440px-Music_of_the_Spheres_World_Tour_Poster.jpeg"
+                           src={item.poster}
                            alt=""
-                           className="border rounded-md w-full h-[230px]"
+                           className="border rounded-md w-full"
                         />
+                        <div className="absolute top-2 right-2">
+                           {!item.total_ticket && (
+                              <Badge variant="destructive">Sold Out</Badge>
+                           )}
+                        </div>
                      </div>
                      <div className="flex flex-col gap-1">
-                        <div className="flex justify-between items-center">
-                           <p className="font-semibold text-lg">
-                              {moment(item.date)
-                                 .locale("id")
-                                 .format("D MMMM II YYYY")}
-                           </p>
-                        </div>
-                        <p className="text-sm font-semibold">{item.title}</p>
+                        <p className="text-xl font-semibold">{item.title}</p>
+                        <p>Rp. {item.price}</p>
                      </div>
+                     <Button
+                        disabled={!item.total_ticket}
+                        onClick={() =>
+                           openModal({
+                              type: "co",
+                              data: {
+                                 price: item.price,
+                                 title: item.title,
+                                 image: item.poster,
+                                 venue: item.venue,
+                                 total_ticket: item.total_ticket,
+                              },
+                           })
+                        }
+                     >
+                        Buy Tickets
+                     </Button>
                   </Card>
                </>
             ))}

@@ -13,7 +13,7 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
       element: <AuthLayout />,
       children: [
          {
-            path: "auth_signin",
+            path: "login",
             element: <SignInPage />,
          },
       ],
