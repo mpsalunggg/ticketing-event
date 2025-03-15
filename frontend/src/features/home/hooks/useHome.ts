@@ -17,9 +17,10 @@ const useHome = () => {
    const { t } = useTranslation();
    const navigate = useNavigate();
    const { closeModal } = useModalStore();
-   const { data } = useFrappeGetDocList<EventActivityValidationType>(
-      "Event Activity",
-      {
+
+   /* --------------------------- HANDLER FUNCTIONS --------------------------- */
+   const { data, mutate: resetListEvent } =
+      useFrappeGetDocList<EventActivityValidationType>("Event Activity", {
          fields: [
             "name",
             "title",
@@ -29,23 +30,20 @@ const useHome = () => {
             "total_ticket",
             "poster",
          ],
-      },
-   );
+      });
 
-   /* --------------------------- HANDLER FUNCTIONS --------------------------- */
-
-   const createTransaction = useFrappePostCall<any>(
-      "ticketing_event.api.transaction.create_transaction",
-   );
-
-   const { call } = useFrappePostCall(
+   const { call: callCreateTransaction } = useFrappePostCall(
       "ticketing_event.api.transaction.create_transaction",
    );
 
    const handleBooked = async (event: string, quantity: number) => {
       try {
-         const res = await call({ event: event, quantity: quantity });
+         const res = await callCreateTransaction({
+            event: event,
+            quantity: quantity,
+         });
          toast.success("Booking berhasil, " + res.message.message);
+         resetListEvent();
          closeModal();
       } catch (err: any) {
          toast.error(err.message);
@@ -58,7 +56,6 @@ const useHome = () => {
       t,
       dataEventActivity: data || [],
       navigate,
-      createTransaction,
       handleBooked,
    };
 };

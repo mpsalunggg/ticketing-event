@@ -4,13 +4,22 @@ import { Card } from "@/components/ui/card";
 import CheckoutTicket from "@/features/home/components/CheckoutTicket";
 import { useHome } from "@/features/home/hooks";
 import { useModalStore } from "@/stores";
+import { Ticket } from "lucide-react";
 
 const HomeView = () => {
    const { dataEventActivity } = useHome();
    const { openModal, modalType, data } = useModalStore();
 
    return (
-      <div className="flex flex-col gap-y-6 px-4">
+      <div className="block space-y-4 px-4">
+         <div className="w-full flex justify-end">
+            <Button variant="default" className="cursor-pointer relative">
+               <Ticket /> Tiketku
+               <div className="absolute -top-1 -left-1 bg-blue-400 w-4 h-4 rounded-full">
+                  <p className="text-white text-[10px]">2</p>
+               </div>
+            </Button>
+         </div>
          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {dataEventActivity.map((item, i) => (
                <Card key={i} className="p-3 shadow-sm">
@@ -21,8 +30,12 @@ const HomeView = () => {
                         className="border rounded-md w-full"
                      />
                      <div className="absolute top-2 right-2">
-                        {!item.total_ticket && (
+                        {!item.total_ticket ? (
                            <Badge variant="destructive">Sold Out</Badge>
+                        ) : (
+                           <Badge variant="default" className="bg-green-400">
+                              {item.total_ticket} Ticket
+                           </Badge>
                         )}
                      </div>
                   </div>
