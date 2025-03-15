@@ -30,20 +30,20 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
    // },
    {
       path: "home",
-      element: (
-         // <Protected>
-         <MainLayout />
-         // </Protected>
-      ),
+      // element: (
+      //    // <Protected>
+      //    <MainLayout />
+      //    // </Protected>
+      // ),
       children: homeRoutes,
    },
    {
       path: "admin",
-      element: (
-         // <Protected>
-         <MainLayout />
-         // </Protected>
-      ),
+      // element: (
+      //    // <Protected>
+      //    <MainLayout />
+      //    // </Protected>
+      // ),
       children: adminRoutes,
    },
 ]);

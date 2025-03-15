@@ -1,4 +1,5 @@
 import { EventActivityValidationType } from "@/schemas/eventActivity";
+import { useModalStore } from "@/stores";
 import {
    useFrappeGetCall,
    useFrappeGetDocList,
@@ -15,7 +16,8 @@ const useHome = () => {
 
    const { t } = useTranslation();
    const navigate = useNavigate();
-   const { data, mutate } = useFrappeGetDocList<EventActivityValidationType>(
+   const { closeModal } = useModalStore();
+   const { data } = useFrappeGetDocList<EventActivityValidationType>(
       "Event Activity",
       {
          fields: [
@@ -36,14 +38,18 @@ const useHome = () => {
       "ticketing_event.api.transaction.create_transaction",
    );
 
-   const { call, isCompleted } = useFrappePostCall(
+   const { call } = useFrappePostCall(
       "ticketing_event.api.transaction.create_transaction",
    );
 
    const handleBooked = async (event: string, quantity: number) => {
-      await call({ event: event, quantity: quantity }).then(() =>
-         toast("Booked Successfully!"),
-      );
+      try {
+         const res = await call({ event: event, quantity: quantity });
+         toast.success("Booking berhasil, " + res.message.message);
+         closeModal();
+      } catch (err: any) {
+         toast.error(err.message);
+      }
    };
 
    /* ---------------------------------- RETURN ------------------------------- */
