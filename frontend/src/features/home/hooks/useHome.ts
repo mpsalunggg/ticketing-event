@@ -6,6 +6,7 @@ import {
 } from "frappe-react-sdk";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const useHome = () => {
    /*  -------------------------------- STATE --------------------------------- */
@@ -17,7 +18,15 @@ const useHome = () => {
    const { data, mutate } = useFrappeGetDocList<EventActivityValidationType>(
       "Event Activity",
       {
-         fields: ["name", "title", "date", "venue", "price", "total_ticket", "poster"],
+         fields: [
+            "name",
+            "title",
+            "date",
+            "venue",
+            "price",
+            "total_ticket",
+            "poster",
+         ],
       },
    );
 
@@ -32,7 +41,9 @@ const useHome = () => {
    );
 
    const handleBooked = async (event: string, quantity: number) => {
-      await call({ event: event, quantity: quantity });
+      await call({ event: event, quantity: quantity }).then(() =>
+         toast("Booked Successfully!"),
+      );
    };
 
    /* ---------------------------------- RETURN ------------------------------- */

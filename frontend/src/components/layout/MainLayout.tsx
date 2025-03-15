@@ -4,6 +4,7 @@ import { Footer } from "@/components/common/footer";
 import { Outlet } from "react-router-dom";
 import { useModalStore } from "@/stores";
 import { Modal } from "@/components/common/modal";
+import { Toaster } from "../ui/sonner";
 
 const MainLayout: React.FC = () => {
    const { status } = useModalStore();
@@ -20,6 +21,7 @@ const MainLayout: React.FC = () => {
          </div>
          <Footer />
          {status && <Modal />}
+         <Toaster />
       </div>
    );
 };
