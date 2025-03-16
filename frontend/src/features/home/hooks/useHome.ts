@@ -49,6 +49,10 @@ const useHome = () => {
       "ticketing_event.api.transaction.create_transaction",
    );
 
+   const { call: callUpdateStatusTransaction } = useFrappePostCall(
+      "ticketing_event.api.transaction.update_transaction_status",
+   );
+
    const handleBooked = async (event: string, quantity: number) => {
       try {
          const res = await callCreateTransaction({
@@ -56,6 +60,25 @@ const useHome = () => {
             quantity: quantity,
          });
          toast.success("Booking berhasil, " + res.message.message);
+         resetListEvent();
+         resetListTransaction();
+         closeModal();
+      } catch (err: any) {
+         toast.error(err.message);
+      }
+   };
+
+   const handleUpdateStatus = async (
+      transaction_id: string,
+      status: string,
+   ) => {
+      try {
+         const res = await callUpdateStatusTransaction({
+            transaction_id,
+            status,
+         });
+
+         toast.success(res.message.message);
          resetListEvent();
          resetListTransaction();
          closeModal();
@@ -72,6 +95,7 @@ const useHome = () => {
       navigate,
       handleBooked,
       dataTransaction,
+      handleUpdateStatus,
    };
 };
 

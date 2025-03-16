@@ -1,23 +1,26 @@
 import { Modal } from "@/components/common/modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { useModalStore } from "@/stores";
 import { Printer } from "lucide-react";
 import { Fragment } from "react";
+import { useHome } from "../hooks";
 
 const TransactionList = () => {
    const { data: dataTransaction } = useModalStore();
+   const { handleUpdateStatus } = useHome();
 
    return (
       <Fragment>
          <Modal
             title="Tiketku"
-            contentClass="lg:min-w-[700px] max-w-[700px] max-h-[90%] flex flex-col"
+            contentClass="lg:min-w-[700px] max-w-[95%] max-h-[90%] flex flex-col"
          >
-            <div className="flex-1 overflow-y-auto mb-4">
+            <div className="mb-4 overflow-y-auto max-h-[60vh]">
                {dataTransaction?.length > 0 ? (
                   dataTransaction.map((item: Record<string, any>) => (
-                     <div
+                     <Card
                         key={item.name}
                         className="border p-4 rounded-lg shadow-sm flex flex-col gap-1 mb-3"
                      >
@@ -59,19 +62,28 @@ const TransactionList = () => {
                         </p>
                         {item.status === "Booked" && (
                            <div className="space-x-1">
-                              <Button className="cursor-pointer" size="sm">
+                              <Button
+                                 className="cursor-pointer"
+                                 size="sm"
+                                 onClick={() =>
+                                    handleUpdateStatus(item.name, "Paid")
+                                 }
+                              >
                                  Pay Now
                               </Button>
                               <Button
                                  variant="destructive"
                                  className="cursor-pointer"
                                  size="sm"
+                                 onClick={() =>
+                                    handleUpdateStatus(item.name, "Cancelled")
+                                 }
                               >
                                  Cancelled
                               </Button>
                            </div>
                         )}
-                     </div>
+                     </Card>
                   ))
                ) : (
                   <p className="text-center text-gray-500">
