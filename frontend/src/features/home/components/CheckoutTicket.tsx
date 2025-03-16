@@ -43,7 +43,7 @@ const CheckoutTicket: React.FC<CheckoutTicketProps> = (props) => {
                      <img
                         src={props.image}
                         alt=""
-                        className="w-[200px] rounded-lg"
+                        className="w-[200px] rounded-lg mb-4"
                      />
                      <div className="flex flex-col gap-3 w-full">
                         <p className="font-semibold text-sm flex gap-2 items-center">

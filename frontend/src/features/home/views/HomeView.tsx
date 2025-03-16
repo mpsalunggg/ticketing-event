@@ -5,19 +5,34 @@ import CheckoutTicket from "@/features/home/components/CheckoutTicket";
 import { useHome } from "@/features/home/hooks";
 import { useModalStore } from "@/stores";
 import { Ticket } from "lucide-react";
+import TransactionList from "../components/TransactionList";
 
 const HomeView = () => {
-   const { dataEventActivity } = useHome();
+   const { dataEventActivity, dataTransaction } = useHome();
    const { openModal, modalType, data } = useModalStore();
 
    return (
       <div className="block space-y-4 px-4">
          <div className="w-full flex justify-end">
-            <Button variant="default" className="cursor-pointer relative">
+            <Button
+               variant="default"
+               className="cursor-pointer relative"
+               disabled={dataTransaction?.length === 0}
+               onClick={() =>
+                  openModal({
+                     type: "transaction",
+                     data: dataTransaction,
+                  })
+               }
+            >
                <Ticket /> Tiketku
-               <div className="absolute -top-1 -left-1 bg-blue-400 w-4 h-4 rounded-full">
-                  <p className="text-white text-[10px]">2</p>
-               </div>
+               {dataTransaction?.length !== 0 && (
+                  <div className="absolute -top-1 -left-1 bg-blue-400 w-4 h-4 rounded-full">
+                     <p className="text-white text-[10px]">
+                        {dataTransaction?.length}
+                     </p>
+                  </div>
+               )}
             </Button>
          </div>
          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -74,6 +89,7 @@ const HomeView = () => {
                totalTicket={data.total_ticket}
             />
          )}
+         {modalType === "transaction" && <TransactionList />}
       </div>
    );
 };

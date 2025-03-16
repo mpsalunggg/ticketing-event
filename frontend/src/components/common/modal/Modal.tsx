@@ -43,7 +43,7 @@ const                                                                           
                         {STATUS_ICON[displayStatus]}
                      </div>
                   )}
-                  <DialogTitle className="px-6 lg:text-4xl text-xl">{displayTitle}</DialogTitle>
+                  <DialogTitle className="px-6 lg:text-3xl text-xl">{displayTitle}</DialogTitle>
                </DialogHeader>
 
                <div className={`px-6 py-2 ${props.childClass}`}>
