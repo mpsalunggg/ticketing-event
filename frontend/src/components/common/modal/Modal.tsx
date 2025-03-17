@@ -25,7 +25,7 @@ const STATUS_ICON = {
    error: <ErrorIcon />,
 };
 
-const Modal: React.FC<ModalProps> = (props) => {
+const                                                                                                                                                                                                                                                                                                                                                                                                                                           Modal: React.FC<ModalProps> = (props) => {
    const { isOpen, closeModal, status, title, message } = useModalStore();
 
    const displayStatus = props.status || status;
@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                         {STATUS_ICON[displayStatus]}
                      </div>
                   )}
-                  <DialogTitle className="px-6">{displayTitle}</DialogTitle>
+                  <DialogTitle className="px-6 lg:text-3xl text-xl">{displayTitle}</DialogTitle>
                </DialogHeader>
 
                <div className={`px-6 py-2 ${props.childClass}`}>
