@@ -20,16 +20,9 @@ def get_social():
     try:
         provider_logins = []
         redirect_to = frappe.local.request.args.get("redirect-to")
+        redirect_to = sanitize_redirect(redirect_to)
+        redirect_to = redirect_to
 
-        session_user = frappe.session.user
-        roles = frappe.get_roles(session_user)
-        # redirect_to = sanitize_redirect(redirect_to) if "System Manager" in roles else "/home"
-
-        if not redirect_to:
-            redirect_to = "/app" if "System Manager" in roles else "/home"
-        else:
-            redirect_to = sanitize_redirect(redirect_to)
-            
         providers = frappe.get_all(
             "Social Login Key",
             filters={"enable_social_login": 1},
@@ -57,9 +50,11 @@ def get_social():
                         "auth_url": get_oauth2_authorize_url(provider.name, redirect_to),
                         "icon": icon,
                     }
-                )    
+                )   
+
         frappe.response['http_status_code'] = 200
         frappe.response.update(success_response('berhasil mengambil data social', provider_logins))
+        print(f"[DEBUG] provider_logins: {provider_logins}")
 
     except Exception as e:
         frappe.response['http_status_code'] = 500
@@ -78,14 +73,6 @@ def sanitize_redirect(redirect: str | None) -> str | None:
 		return redirect
 
 	return None
-
-def get_all_roles():
-    try:
-        roles = frappe.get_all("Role", fields=["name"])
-        return roles
-    except Exception as e:
-        frappe.throw(f"terjadi kesalahan: {str(e)}")
-
 
 
 # @frappe.whitelist(allow_guest=True)
